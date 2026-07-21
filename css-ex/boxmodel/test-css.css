@@ -1,0 +1,21 @@
+.hello{
+    padding-top: 40px;
+    padding-left: 100px; 
+    padding-right: 40px;
+    box-sizing: border-box;
+    border: 10px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 40px;
+    margin: 0 auto;
+}
+*{padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+
+
+/**หรือจะเขียนว่า Padding: top down left right; ได้ โดยไม่ต้องแยกบรรทัด**/
+/**หรือจะเขียนว่า border: 10px black style solid; ได้*/
+/**แนะนำให้ตั้งชื่อ div ในหน้านี้คือ hello เพื่อป้องกันการเกิด bug ของคนที่มาใช้เว็บเราคนอื่นๆ ที่มีการลงโปรแกรมอื่นๆหลายโปรแกรม แล้วโค้ดอ่านไปหลายโค้ด หน้าเว็บจะรวน **/
