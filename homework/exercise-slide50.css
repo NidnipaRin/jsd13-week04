@@ -1,0 +1,46 @@
+body {
+  font-family: "Roboto", "sans-serif";
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.card {
+  max-width: 720px;
+  width: 100%;
+  background-color: #ddcab9;
+  overflow: hidden;
+
+}
+
+
+.content-header {
+  padding: 30px 20px 24px 20px;
+}
+
+
+h1 {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: #250f03;
+  margin-bottom: 20px;
+}
+
+
+.description {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #250f03;
+  max-width: 580px;
+}
+
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

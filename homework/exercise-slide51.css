@@ -1,0 +1,77 @@
+body {
+  font-family: "Roboto", "sans-serif";
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.card {
+  max-width: 500px;
+  width: 100%;
+  background-color: #ddcab9;
+  overflow: hidden;
+  border: 2px;
+  border-color: #250f03;
+  border-style: solid;
+}
+
+.content-header {
+  padding: 20px;
+}
+
+
+h1 {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: #250f03;
+  margin-bottom: 20px;
+}
+
+.statlabel1, .statlabel2 {
+  margin-bottom: 16px;
+}
+
+.statlabel1 span {
+display: inline-block;
+ background-color: #963c00;
+  font-size: 100px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 20px; 
+}
+
+
+.statlabel2 span {
+display: inline-block;
+ background-color: #963c00;
+ font-size: 80px;
+ font-weight: 800;
+ line-height: 1;
+ letter-spacing: 2px;
+ color: white;
+ padding: 12px 20px;
+ border-radius: 20px; 
+}
+
+
+.description1 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: #250f03;
+  max-width: 580px;
+}
+
+.description2 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #250f03;
+  max-width: 580px;
+}
