@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS justify-content Interactive Playground</title>
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --bg-code: #090d16;
+            --accent-blue: #38bdf8;
+            --accent-purple: #818cf8;
+            --accent-green: #34d399;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 2rem;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 968px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Controls Sidebar */
+        .controls-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-blue);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .control-group label span {
+            color: var(--text-main);
+            font-family: monospace;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.4rem;
+        }
+
+        .btn-option {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.6rem 0.8rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.9rem;
+            font-family: monospace;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-option:hover {
+            background-color: rgba(56, 189, 248, 0.1);
+            border-color: var(--accent-blue);
+        }
+
+        .btn-option.active {
+            background-color: var(--accent-blue);
+            color: #000;
+            font-weight: bold;
+            border-color: var(--accent-blue);
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .btn-toggle {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-toggle:hover {
+            border-color: var(--accent-purple);
+        }
+
+        .btn-toggle.active {
+            background-color: var(--accent-purple);
+            color: #ffffff;
+            font-weight: bold;
+            border-color: var(--accent-purple);
+        }
+
+        .range-slider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .range-slider input[type="range"] {
+            flex: 1;
+            accent-color: var(--accent-blue);
+        }
+
+        /* Canvas & Output Area */
+        .preview-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .canvas-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .canvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+
+        .axis-indicator {
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+
+        /* Fixed Dimensions Parent Flex Container Window */
+        .flex-container {
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 2px dashed var(--border-color);
+            border-radius: 0.75rem;
+            width: 100%;
+            height: 400px;
+            display: flex;
+            padding: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        /* Flex Items */
+        .flex-item {
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: width 0.2s ease, height 0.2s ease, transform 0.2s ease;
+            animation: popIn 0.3s ease-out;
+            flex-shrink: 0;
+        }
+
+        .flex-item:nth-child(1) { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .flex-item:nth-child(2) { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .flex-item:nth-child(3) { background: linear-gradient(135deg, #10b981, #059669); }
+        .flex-item:nth-child(4) { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .flex-item:nth-child(5) { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Code & Description Block */
+        .info-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .desc-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .desc-text {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .code-block {
+            background-color: var(--bg-code);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-keyword { color: #f472b6; }
+        .code-prop { color: #38bdf8; }
+        .code-val { color: #a3e635; }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.3rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-blue);
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CSS justify-content Playground</h1>
+        <p>ทดลองปรับแต่งค่าเพื่อความเข้าใจเชิงลึกเกี่ยวกับแกนหลัก (Main Axis) ใน Flexbox</p>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar Controls -->
+        <div class="controls-card">
+            <div class="control-group">
+                <label>justify-content Values</label>
+                <div class="options-grid">
+                    <button class="btn-option active" data-val="flex-start">flex-start <span>•</span></button>
+                    <button class="btn-option" data-val="flex-end">flex-end <span>•</span></button>
+                    <button class="btn-option" data-val="center">center <span>•</span></button>
+                    <button class="btn-option" data-val="space-between">space-between <span>•</span></button>
+                    <button class="btn-option" data-val="space-around">space-around <span>•</span></button>
+                    <button class="btn-option" data-val="space-evenly">space-evenly <span>•</span></button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>flex-direction</label>
+                <div class="btn-group">
+                    <button class="btn-toggle active" id="dir-row">row</button>
+                    <button class="btn-toggle" id="dir-col">column</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Parent Height <span id="height-val">400px</span></label>
+                <div class="range-slider">
+                    <input type="range" id="parent-height" min="250" max="600" value="400" step="10">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Number of Items <span id="count-val">3</span></label>
+                <div class="range-slider">
+                    <input type="range" id="item-count" min="1" max="5" value="3">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Box Size <span id="size-val">70px</span></label>
+                <div class="range-slider">
+                    <input type="range" id="box-size" min="40" max="120" value="70" step="5">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Gap Between Boxes <span id="gap-val">16px</span></label>
+                <div class="range-slider">
+                    <input type="range" id="box-gap" min="0" max="48" value="16" step="4">
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Canvas -->
+        <div class="preview-section">
+            <div class="canvas-card">
+                <div class="canvas-header">
+                    <span>PARENT CONTAINER (.container)</span>
+                    <div class="axis-indicator">
+                        <span id="axis-text">Main Axis: Horizontal (X →)</span>
+                    </div>
+                </div>
+
+                <div class="flex-container" id="flexBox">
+                    <div class="flex-item">1</div>
+                    <div class="flex-item">2</div>
+                    <div class="flex-item">3</div>
+                </div>
+            </div>
+
+            <!-- Code & Live Explanation -->
+            <div class="info-card">
+                <div class="desc-title" id="infoTitle">flex-start</div>
+                <div class="desc-text" id="infoDesc">
+                    กอง Flex Items ไว้ที่จุดเริ่มต้นของ Main Axis (ค่า Default ของ CSS)
+                </div>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode()">Copy CSS</button>
+                    <pre><code id="codeOutput">.container { ... }</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const descriptions = {
+            'flex-start': {
+                title: 'justify-content: flex-start (Default)',
+                desc: 'จัดเรียง Item ทั้งหมดให้กองรวมกันที่จุดเริ่มต้นของ Container ตามแกน Main Axis'
+            },
+            'flex-end': {
+                title: 'justify-content: flex-end',
+                desc: 'จัดเรียง Item ทั้งหมดให้กองรวมกันที่จุดสิ้นสุดของ Container ตามแกน Main Axis'
+            },
+            'center': {
+                title: 'justify-content: center',
+                desc: 'จัดเรียง Item ทั้งหมดให้อยู่ตรงกลางของ Container ตามแกน Main Axis'
+            },
+            'space-between': {
+                title: 'justify-content: space-between',
+                desc: 'ดันตัวแรกสุดชิดจุดเริ่มต้น ดันตัวท้ายสุดชิดจุดสิ้นสุด แล้วแบ่งพื้นที่ว่างที่เหลือระหว่าง Items เท่าๆ กัน'
+            },
+            'space-around': {
+                title: 'justify-content: space-around',
+                desc: 'กระจายพื้นที่ว่างรอบๆ แต่ละ Item เท่าๆ กัน (ผลลัพธ์คือพื้นที่ขอบนอกสุดจะกว้างเป็นครึ่งหนึ่งของพื้นที่ระหว่าง Item)'
+            },
+            'space-evenly': {
+                title: 'justify-content: space-evenly',
+                desc: 'กระจายพื้นที่ว่างทั้งหมดให้เท่ากันอย่างสมบูรณ์ ทั้งระยะห่างระหว่าง Item และระยะห่างชิดขอบ Container'
+            }
+        };
+
+        // DOM Elements
+        const flexBox = document.getElementById('flexBox');
+        const optionBtns = document.querySelectorAll('.btn-option');
+        const dirRowBtn = document.getElementById('dir-row');
+        const dirColBtn = document.getElementById('dir-col');
+        const parentHeightInput = document.getElementById('parent-height');
+        const itemCountInput = document.getElementById('item-count');
+        const boxSizeInput = document.getElementById('box-size');
+        const boxGapInput = document.getElementById('box-gap');
+        const heightValSpan = document.getElementById('height-val');
+        const countValSpan = document.getElementById('count-val');
+        const sizeValSpan = document.getElementById('size-val');
+        const gapValSpan = document.getElementById('gap-val');
+        const infoTitle = document.getElementById('infoTitle');
+        const infoDesc = document.getElementById('infoDesc');
+        const codeOutput = document.getElementById('codeOutput');
+        const axisText = document.getElementById('axis-text');
+
+        // App State
+        let currentJustify = 'flex-start';
+        let currentDir = 'row';
+        let currentParentHeight = 400;
+        let currentCount = 3;
+        let currentSize = 70;
+        let currentGap = 16;
+
+        function updateStyles() {
+            flexBox.style.justifyContent = currentJustify;
+            flexBox.style.flexDirection = currentDir;
+            flexBox.style.height = `${currentParentHeight}px`;
+            flexBox.style.gap = `${currentGap}px`;
+
+            // Update Items Size
+            const items = document.querySelectorAll('.flex-item');
+            items.forEach(item => {
+                item.style.width = `${currentSize}px`;
+                item.style.height = `${currentSize}px`;
+                item.style.fontSize = `${Math.max(1, currentSize / 56)}rem`;
+            });
+
+            // Update Info
+            infoTitle.innerText = descriptions[currentJustify].title;
+            infoDesc.innerText = descriptions[currentJustify].desc;
+
+            // Update Axis Text
+            if (currentDir === 'row') {
+                axisText.innerText = 'Main Axis: Horizontal (X →)';
+            } else {
+                axisText.innerText = 'Main Axis: Vertical (Y ↓)';
+            }
+
+            // Update Code Snippet
+            let gapCode = currentGap > 0 ? `
+  <span class="code-prop">gap</span>: <span class="code-val">${currentGap}px</span>;` : '';
+            codeOutput.innerHTML = `<span class="code-keyword">.container</span> {
+  <span class="code-prop">display</span>: <span class="code-val">flex</span>;
+  <span class="code-prop">flex-direction</span>: <span class="code-val">${currentDir}</span>;
+  <span class="code-prop">justify-content</span>: <span class="code-val">${currentJustify}</span>;
+  <span class="code-prop">height</span>: <span class="code-val">${currentParentHeight}px</span>;${gapCode}
+}
+
+<span class="code-keyword">.item</span> {
+  <span class="code-prop">width</span>: <span class="code-val">${currentSize}px</span>;
+  <span class="code-prop">height</span>: <span class="code-val">${currentSize}px</span>;
+}`;
+        }
+
+        function renderItems() {
+            flexBox.innerHTML = '';
+            for (let i = 1; i <= currentCount; i++) {
+                const item = document.createElement('div');
+                item.className = 'flex-item';
+                item.innerText = i;
+                flexBox.appendChild(item);
+            }
+            updateStyles();
+        }
+
+        // Event Listeners
+        optionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                optionBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentJustify = btn.getAttribute('data-val');
+                updateStyles();
+            });
+        });
+
+        dirRowBtn.addEventListener('click', () => {
+            dirRowBtn.classList.add('active');
+            dirColBtn.classList.remove('active');
+            currentDir = 'row';
+            updateStyles();
+        });
+
+        dirColBtn.addEventListener('click', () => {
+            dirColBtn.classList.add('active');
+            dirRowBtn.classList.remove('active');
+            currentDir = 'column';
+            updateStyles();
+        });
+
+        parentHeightInput.addEventListener('input', (e) => {
+            currentParentHeight = parseInt(e.target.value);
+            heightValSpan.innerText = `${currentParentHeight}px`;
+            updateStyles();
+        });
+
+        itemCountInput.addEventListener('input', (e) => {
+            currentCount = parseInt(e.target.value);
+            countValSpan.innerText = currentCount;
+            renderItems();
+        });
+
+        boxSizeInput.addEventListener('input', (e) => {
+            currentSize = parseInt(e.target.value);
+            sizeValSpan.innerText = `${currentSize}px`;
+            updateStyles();
+        });
+
+        boxGapInput.addEventListener('input', (e) => {
+            currentGap = parseInt(e.target.value);
+            gapValSpan.innerText = `${currentGap}px`;
+            updateStyles();
+        });
+
+        function copyCode() {
+            const gapText = currentGap > 0 ? `
+  gap: ${currentGap}px;` : '';
+            const rawCode = `.container {
+  display: flex;
+  flex-direction: ${currentDir};
+  justify-content: ${currentJustify};
+  height: ${currentParentHeight}px;${gapText}
+}
+
+.item {
+  width: ${currentSize}px;
+  height: ${currentSize}px;
+}`;
+            navigator.clipboard.writeText(rawCode).then(() => {
+                const copyBtn = document.querySelector('.copy-btn');
+                copyBtn.innerText = 'Copied!';
+                setTimeout(() => copyBtn.innerText = 'Copy CSS', 1500);
+            });
+        }
+
+        // Initial Setup
+        renderItems();
+    </script>
+</body>
+</html>
