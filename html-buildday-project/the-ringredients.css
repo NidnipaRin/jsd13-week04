@@ -48,6 +48,7 @@ p {
   margin-bottom: 24px; /* เว้นระยะห่างดันปุ่มด้านล่างออก ไม่ให้ติดข้อความ */
 }
 
+
 /* 3. ปุ่มกด & LINKS
   -------------------------------------------------------------------------- */
 .cta-button {
@@ -134,21 +135,13 @@ p {
   object-fit: cover;
 }
 
-/* Overlay ไล่เฉดสีเบาๆ ให้ข้อความอ่านง่ายขึ้น */
-.head-section::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(255,243,226,0.85) 0%, rgba(255,243,226,0.3) 60%, rgba(255,243,226,0) 100%);
-  z-index: 2;
-}
-
 .head-text-left {
   position: relative;
   z-index: 3;
   max-width: 550px;
   margin-left: 8%;
   padding: 20px;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
 }
 
 /* --- Menu Grid Section --- */
