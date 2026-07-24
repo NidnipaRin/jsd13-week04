@@ -27,7 +27,19 @@ a {
 
 /*สำหรับตัวอักษร*
 -------------------------------*/
+h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
 
+.text-large {
+    font-size: 18px;
+    color: #4a4a4a;
+    margin-bottom: 24px;
+}
 
 /*Header*
 -------------------------------*/
@@ -82,14 +94,23 @@ header {
 -------------------------------*/
 .banner {
     display: flex;
-    max-width: 1300px;
     width: 100%;
     background-color: #d8d6d5;
     overflow: hidden;
     align-items: center;
-    justify-content: flex-start;
     gap: 24px;
     padding: 32px 24px;
+}
+
+.banner-image {
+    flex: 0 0 60%;
+
+}
+.banner-image img{
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .banner-content {
@@ -98,15 +119,6 @@ header {
     flex-direction: column;
     justify-content: center;
 }
-
-
-.banner-image img{
-    display: block;
-    width: 60%;
-    height: auto;
-    object-fit: cover;
-}
-
 .btn-start {
   display: inline-block;
   background-color: #4d4c4c;
@@ -123,6 +135,7 @@ header {
 /*สำหรับปรับหน้าจอมือถือ*
 -------------------------------*/
 @media (max-width: 768px) {
+
 .header-desktop {
     display: none; /* ซ่อน Header คอมบนจอมือถือ */
   }
@@ -132,5 +145,10 @@ header {
     justify-content: space-around;
     align-items: center;
     height: 64px;
-    padding: 0 16px;}
+    width: 100%;}
+
+/*โซน banner*/
+.banner {
+    flex-direction: column;
+}
 }
