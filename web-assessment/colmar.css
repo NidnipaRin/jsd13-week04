@@ -31,18 +31,22 @@ h1 {
     font-size: 40px;
     font-weight: bold;
     color: #4a4a4a;
-    margin-bottom: 16px;
-    line-height: 1.2;
+    margin-bottom: 32px;
 }
 
 h2 {
     font-size: 35px;
     font-weight: bold;
     color: #4a4a4a;
+    margin-top: 32px;
     margin-bottom: 24px;
-    line-height: 1.2;
 }
 
+h3 {font-size: 30px;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-bottom: 8px;
+}
 
 .text-large {
     font-size: 25px;
@@ -53,12 +57,15 @@ h2 {
 .text-medium {
     font-size: 20px;
     color: #4a4a4a;
-    margin-bottom: 32px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .text-small {
     font-size: 16px;
     color: #4a4a4a;
+    margin-top: 32px;
+
 }
 
 /*Header*
@@ -140,16 +147,6 @@ header {
     flex-direction: column;
     justify-content: center;
 }
-.btn-start {
-  display: inline-block;
-  background-color: #4d4c4c;
-  font-size: 16px;
-  font-weight: 300;
-  color: white;
-  padding: 8px 0px;
-  width: 100%;
-  text-align: center;
-}
 
 /*ส่วนของ Information (It doesn't...)*
 -------------------------------*/
@@ -166,16 +163,70 @@ header {
     padding: 32px 24px;
     background-color: #ececec;
     border-right: 1px solid #b4b4b4
-    
 }
 
 .left-info-image{
     width: 100%;
 }
 
-.left-info-content {
-    padding: 32px 0px;
+
+.right-info {
+    max-width: 40%;
+    flex: 0 0 40%;
+    background-color: #ececec;
 }
+
+.right-card{
+    display: flex;
+    justify-items: flex-start;
+    align-items: center;
+    width: 100%;
+    background-color: #ececec;
+    overflow: hidden;
+    border-bottom: 1px solid #b4b4b4;
+}
+
+.right-card-guest {
+    display: flex;
+    justify-items: flex-start;
+    align-items: center;
+    width: 100%;
+    background-color: #b4b4b4;
+    overflow: hidden;
+    border-bottom: 1px solid #b4b4b4;
+}
+
+.right-info-image{
+    max-width: 35%;
+    height: auto;
+    padding: 16px 16px;;
+}
+
+.right-info-content {
+    padding: 16px 0px;
+}
+
+
+/*ส่วนของ link*
+-------------------------------*/
+.btn-start {
+  display: inline-block;
+  background-color: #4d4c4c;
+  font-size: 16px;
+  font-weight: 300;
+  color: white;
+  padding: 8px 0px;
+  width: 100%;
+  text-align: center;
+}
+
+.cta-link{
+  font-family: sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: #0bb1f3;
+  transition: background-color 0.2s ease;
+  }
 
 /*สำหรับปรับหน้าจอมือถือ*
 -------------------------------*/
@@ -196,4 +247,59 @@ header {
 .banner {
     flex-direction: column;
 }
+
+
+/*โซน infomation*/
+.left-info, .right-info {
+    display: none; /* ซ่อนข้อมูลฝั่งขวาของจอคอม บนจอมือถือ */
+  }
+
+.right-info-mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 16px 0px 32px 0;
+    background-color: #ececec;
+}
+
+.mobile-card1 {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+    margin-bottom: 64px;
+}
+
+.mobile-card2 {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+}
+
+.mobile-card img {
+    width: 100%;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.mobile-card-content h3 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-left: 16px;
+    margin-bottom: 8px;
+}
+
+.mobile-card-content p.text-medium {
+    font-size: 20px;
+    color: #4a4a4a;
+    margin-top: 0px;
+    margin-left: 16px;
+    margin-bottom: 8px;
+}
+
+.cta-link {
+    margin-left: 16px;
+}
+
+
 }
