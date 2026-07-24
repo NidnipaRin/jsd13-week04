@@ -268,6 +268,16 @@ header {
   transition: background-color 0.2s ease;
   }
 
+  /*สำหรับปรับหน้าจอคอม*
+-------------------------------*/
+@media screen and (min-width: 1440px) {
+.block-course-mobile {
+    display: none; /* ซ่อนข้อมูลฝั่งขวาของมือถือจากจอคอม */
+}
+
+
+}
+
 /*สำหรับปรับหน้าจอมือถือ*
 -------------------------------*/
 @media (max-width: 768px) {
@@ -290,8 +300,8 @@ header {
 
 
 /*โซน infomation*/
-.left-info, .right-info {
-    display: none; /* ซ่อนข้อมูลฝั่งขวาของจอคอม บนจอมือถือ */
+.left-info, .right-info, .block-course {
+    display: none; /* ซ่อนข้อมูลของจอคอม บนจอมือถือ */
   }
 
 .right-info-mobile {
@@ -341,5 +351,26 @@ header {
     margin-left: 16px;
 }
 
+/*โซน course*/
+.block-course-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px;
+    background-color: #ececec;
+}
+
+.block-course-mobile h2{
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.course-info-mobile {
+    width: 100%;
+    background-color: #9b9b9b;
+    padding: 16px 0px 24px 16px;
+    margin-bottom: 8px;
+
+}
 
 }
