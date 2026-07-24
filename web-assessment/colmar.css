@@ -247,6 +247,35 @@ header {
   display: block;
 }
 
+/*ส่วนของ exhibit*
+-----------------------*/
+.exhibit{
+    display: flex;
+    width: 100%;
+    background-color:#ececec;
+    overflow: hidden;
+}
+
+.block-exhibit{
+    background-color: #ececec;
+    padding: 32px 40px 0px 40px;
+}
+
+.block-exhibit h2{
+    text-align: center;
+}
+
+.left-exhibit-video{
+    width: 60%;
+}
+.left-exhibit {
+    max-width: 60%;
+    flex: 0 0 60%;
+    padding: 32px 24px;
+    background-color: #ececec;
+    border-right: 1px solid #b4b4b4
+}
+
 /*ส่วนของ link*
 -------------------------------*/
 .btn-start {
@@ -271,8 +300,8 @@ header {
   /*สำหรับปรับหน้าจอคอม*
 -------------------------------*/
 @media screen and (min-width: 1440px) {
-.block-course-mobile {
-    display: none; /* ซ่อนข้อมูลฝั่งขวาของมือถือจากจอคอม */
+.block-course-mobile{
+    display: none; /* ซ่อนข้อมูลของมือถือจากจอคอม */
 }
 
 
@@ -300,7 +329,7 @@ header {
 
 
 /*โซน infomation*/
-.left-info, .right-info, .block-course {
+.left-info, .right-info, .block-course, .right-exhibit  {
     display: none; /* ซ่อนข้อมูลของจอคอม บนจอมือถือ */
   }
 
